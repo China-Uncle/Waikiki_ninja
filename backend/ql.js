@@ -61,6 +61,7 @@ module.exports.addEnv = async (cookie, remarks) => {
 
 module.exports.updateEnv = async (cookie, eid, remarks) => {
   const token = await getToken();
+  if(remarks)remarks='';
   const body = await api({
     method: 'put',
     url: 'api/envs',
@@ -68,7 +69,7 @@ module.exports.updateEnv = async (cookie, eid, remarks) => {
     json: {
       name: 'JD_COOKIE',
       value: cookie,
-      _id: eid,
+      id: eid,
       remarks,
     },
     headers: {
