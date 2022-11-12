@@ -126,6 +126,8 @@ Ninja 仅支持 qinglong 2.8.2+
 ```bash
 git clone https://github.com/China-Uncle/Waikiki_ninja.git
 cd ninja/backend
+# 国内机器 先执行下面注释的
+#pnpm config set registry https://registry.npmmirror.com && pnpm config set sass_binary_site https://npmmirror.com/mirrors/node-sass 
 pnpm install
 # 复制 sendNotify.js 到容器内 scripts 目录，`qinglong` 为容器名
 sudo docker cp sendNotify.js qinglong:/ql/scripts/sendNotify.js
