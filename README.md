@@ -98,7 +98,7 @@ Ninja 仅支持 qinglong 2.8.2+
    **进容器内执行以下命令**
 
    ```bash
-   git clone https://github.com/China-Uncle/Waikiki_ninja.git /ql/ninja
+   git clone -b qinglong2.11 https://github.com/China-Uncle/Waikiki_ninja.git /ql/ninja
    cd /ql/ninja/backend
    pnpm install
    cp .env.example .env # 如有需要, 修改.env
@@ -124,7 +124,7 @@ Ninja 仅支持 qinglong 2.8.2+
 使用此种方法无法跟随青龙一起启动，**无法发送扫码通知**，请知悉。
 
 ```bash
-git clone https://github.com/China-Uncle/Waikiki_ninja.git
+git clone  https://github.com/China-Uncle/Waikiki_ninja.git ninja2.11
 cd ninja/backend
 # 国内机器 先执行下面注释的
 #pnpm config set registry https://registry.npmmirror.com && pnpm config set sass_binary_site https://npmmirror.com/mirrors/node-sass 
