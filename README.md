@@ -140,7 +140,7 @@ node app.js
 在 `.env` 文件中添加以下内容：
 
 ```bash
-QL_DIR=qinglong 容器的本地路径
+QL_DATA_DIR=qinglong 容器的本地路径
 QL_URL=http://localhost:5700
 ```
 
