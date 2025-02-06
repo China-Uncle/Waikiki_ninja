@@ -134,12 +134,15 @@ export default {
       data.showQR = info.showQR
       data.showWSCK = info.showWSCK
       data.showCK = info.showCK
+      console.info($data)
 
     }
 
     const getQrcode = async () => {
+
+      console.info($data)
       // 增加扫码是否禁用判断
-      if (this.showQR) {
+      if (data.showQR) {
         try {
           const body = await getQrcodeAPI()
           data.token = body.data.token
