@@ -4,27 +4,45 @@ const got = require('got');
 require('dotenv').config();
 const { readFile } = require('fs/promises');
 const path = require('path');
- 
-const client_id=process.env.CLIENT_ID;
-const client_secret=process.env.CLIENT_SECRET;
+
+const client_id = process.env.CLIENT_ID;
+const client_secret = process.env.CLIENT_SECRET;
 
 const api = got.extend({
   prefixUrl: process.env.QL_URL || 'http://localhost:5700',
   retry: { limit: 0 },
+  hooks: {
+    beforeRequest: [
+      options => {
+        console.log('➡️ 发送请求:', options.method, options.url.toString());
+      }
+    ],
+    afterResponse: [
+      response => {
+        console.log('⬅️ 收到响应:', response.statusCode);
+        return response;
+      }
+    ],
+    beforeError: [
+      error => {
+        console.error('❌ 请求失败:', error.message);
+        if (error.response) {
+          console.error('📥 响应状态码:', error.response.statusCode);
+          console.error('📄 响应内容:', error.response.body);
+        }
+        return error;
+      }
+    ]
+  }
 });
 
-async function getToken() { 
+async function getToken() {
   const body = await api({
-    url: 'open/auth/token',
-    searchParams: {
-      client_id: client_id,
-      client_secret: client_secret,
-      t: Date.now(),
-    },
+    url: 'open/auth/token?client_id=' + client_id + '&client_secret=' + client_secret,
     headers: {
-      Accept: 'application/json', 
+      Accept: 'application/json',
     },
-  }).json(); 
+  }).json();
   return body.data.token;
 }
 
@@ -71,7 +89,7 @@ module.exports.addEnv = async (cookie, remarks) => {
 
 module.exports.updateEnv = async (cookie, eid, remarks) => {
   const token = await getToken();
-  if(remarks)remarks='';
+  if (remarks) remarks = '';
   const body = await api({
     method: 'put',
     url: 'open/envs',
