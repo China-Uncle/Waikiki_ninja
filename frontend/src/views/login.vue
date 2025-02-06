@@ -119,7 +119,7 @@ export default {
       marginWSCKCount: 0,
       allowWSCKAdd: true,
       jdwsck: undefined,
-      showQR:false,
+      showQR:true,
       showWSCK:false,
       showCK:true,
 
