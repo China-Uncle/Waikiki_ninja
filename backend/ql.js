@@ -11,29 +11,29 @@ const client_secret = process.env.CLIENT_SECRET;
 const api = got.extend({
   prefixUrl: process.env.QL_URL || 'http://localhost:5700',
   retry: { limit: 0 },
-  hooks: {
-    beforeRequest: [
-      options => {
-        console.log('➡️ 发送请求:', options.method, options.url.toString());
-      }
-    ],
-    afterResponse: [
-      response => {
-        console.log('⬅️ 收到响应:', response.statusCode);
-        return response;
-      }
-    ],
-    beforeError: [
-      error => {
-        console.error('❌ 请求失败:', error.message);
-        if (error.response) {
-          console.error('📥 响应状态码:', error.response.statusCode);
-          console.error('📄 响应内容:', error.response.body);
-        }
-        return error;
-      }
-    ]
-  }
+  // hooks: {
+  //   beforeRequest: [
+  //     options => {
+  //       console.log('➡️ 发送请求:', options.method, options.url.toString());
+  //     }
+  //   ],
+  //   afterResponse: [
+  //     response => {
+  //       console.log('⬅️ 收到响应:', response.statusCode);
+  //       return response;
+  //     }
+  //   ],
+  //   beforeError: [
+  //     error => {
+  //       console.error('❌ 请求失败:', error.message);
+  //       if (error.response) {
+  //         console.error('📥 响应状态码:', error.response.statusCode);
+  //         console.error('📄 响应内容:', error.response.body);
+  //       }
+  //       return error;
+  //     }
+  //   ]
+  // }
 });
 
 async function getToken() {
