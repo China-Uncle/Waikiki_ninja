@@ -141,6 +141,7 @@ export default {
     const getQrcode = async () => {
 
       console.info(data)
+      console.info(data.showQR)
       // 增加扫码是否禁用判断
       if (data.showQR) {
         try {
