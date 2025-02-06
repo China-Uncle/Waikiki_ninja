@@ -156,12 +156,12 @@ module.exports = class User {
   }
 
   async checkQRLogin() {
-    if(true){
-      return {
-        errcode: 200,
-        message: '扫码登录已关闭，请自行抓包手动CK登录',
-      };
-    }
+    // if(true){
+    //   return {
+    //     errcode: 200,
+    //     message: '扫码登录已关闭，请自行抓包手动CK登录',
+    //   };
+    // }
     if (!this.token || !this.okl_token || !this.cookies) {
       throw new Error('初始化登录请求失败！');
     }
