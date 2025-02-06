@@ -13,27 +13,25 @@ const api = got.extend({
   retry: { limit: 0 },
 });
 
-async function getToken() {
+async function getToken() { 
   const body = await api({
-    url: 'api/envs',
+    url: 'open/auth/token',
     searchParams: {
       client_id: client_id,
       client_secret: client_secret,
       t: Date.now(),
     },
     headers: {
-      Accept: 'application/json',
-      authorization: `Bearer ${token}`,
+      Accept: 'application/json', 
     },
-  }).json();
- 
+  }).json(); 
   return body.data.token;
 }
 
 module.exports.getEnvs = async () => {
   const token = await getToken();
   const body = await api({
-    url: 'api/envs',
+    url: 'open/envs',
     searchParams: {
       searchValue: 'JD_COOKIE',
       t: Date.now(),
@@ -55,7 +53,7 @@ module.exports.addEnv = async (cookie, remarks) => {
   const token = await getToken();
   const body = await api({
     method: 'post',
-    url: 'api/envs',
+    url: 'open/envs',
     params: { t: Date.now() },
     json: [{
       name: 'JD_COOKIE',
@@ -76,7 +74,7 @@ module.exports.updateEnv = async (cookie, eid, remarks) => {
   if(remarks)remarks='';
   const body = await api({
     method: 'put',
-    url: 'api/envs',
+    url: 'open/envs',
     params: { t: Date.now() },
     json: {
       name: 'JD_COOKIE',
@@ -97,7 +95,7 @@ module.exports.delEnv = async (eid) => {
   const token = await getToken();
   const body = await api({
     method: 'delete',
-    url: 'api/envs',
+    url: 'open/envs',
     params: { t: Date.now() },
     body: JSON.stringify([eid]),
     headers: {
@@ -114,7 +112,7 @@ module.exports.delEnv = async (eid) => {
 module.exports.getWSCKEnvs = async () => {
   const token = await getToken();
   const body = await api({
-    url: 'api/envs',
+    url: 'open/envs',
     searchParams: {
       searchValue: 'JD_WSCK',
       t: Date.now(),
@@ -136,7 +134,7 @@ module.exports.addWSCKEnv = async (jdwsck, remarks) => {
   const token = await getToken();
   const body = await api({
     method: 'post',
-    url: 'api/envs',
+    url: 'open/envs',
     params: { t: Date.now() },
     json: [{
       name: 'JD_WSCK',
@@ -156,7 +154,7 @@ module.exports.updateWSCKEnv = async (jdwsck, wseid, remarks) => {
   const token = await getToken();
   const body = await api({
     method: 'put',
-    url: 'api/envs',
+    url: 'open/envs',
     params: { t: Date.now() },
     json: {
       name: 'JD_WSCK',
@@ -177,7 +175,7 @@ module.exports.delWSCKEnv = async (wseid) => {
   const token = await getToken();
   const body = await api({
     method: 'delete',
-    url: 'api/envs',
+    url: 'open/envs',
     params: { t: Date.now() },
     body: JSON.stringify([wseid]),
     headers: {
